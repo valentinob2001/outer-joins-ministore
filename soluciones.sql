@@ -16,7 +16,9 @@ SELECT
     v.cantidad
 FROM productos p
 LEFT JOIN ventas v
-ON p.producto_id = v.producto_id;
+ON p.producto_id = v.producto_id
+ORDER BY p.producto_id;
+
 
 -- ── CONSULTA 2: RIGHT JOIN ────────────────
 -- Pregunta de negocio: ¿Existen ventas registradas con productos
@@ -24,14 +26,16 @@ ON p.producto_id = v.producto_id;
 -- Los registros huérfanos aparecerán con NULL en las columnas de productos.
 
 SELECT
-    v.producto_id,
+    p.producto_id,
     p.nombre,
-    v.cantidad,
-    (p.precio * v.cantidad) total
+    v.venta_id,
+    v.producto_id,
+    v.cantidad
 FROM productos p
 RIGHT JOIN ventas v
 ON p.producto_id = v.producto_id
 WHERE p.producto_id IS NULL
+ORDER BY v.venta_id;
 
 
 -- ── CONSULTA 3: FULL OUTER JOIN ───────────
