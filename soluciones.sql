@@ -10,9 +10,10 @@
 -- Los productos sin ventas aparecerán con NULL en las columnas de ventas.
 
 SELECT
+    p.producto_id,
     p.nombre,
-    v.cantidad,
-    (p.precio * v.cantidad) total
+    v.venta_id,
+    v.cantidad
 FROM productos p
 LEFT JOIN ventas v
 ON p.producto_id = v.producto_id;
@@ -39,7 +40,10 @@ WHERE p.producto_id IS NULL
 -- identificando tanto productos sin ventas como ventas sin producto.
 
 SELECT
+    p.producto_id,
     p.nombre,
+    v.producto_id,
+    v.venta_id,
     v.cantidad
 FROM productos p
 FULL OUTER JOIN ventas v
